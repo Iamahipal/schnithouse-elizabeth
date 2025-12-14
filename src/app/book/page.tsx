@@ -74,7 +74,7 @@ export default function BookPage() {
                                     <div>
                                         <label className="block font-body text-sm text-muted mb-2">Name *</label>
                                         <div className="relative">
-                                            <User className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} />
+                                            <User className="input-icon" size={18} />
                                             <input
                                                 type="text"
                                                 value={formData.name}
@@ -88,7 +88,7 @@ export default function BookPage() {
                                     <div>
                                         <label className="block font-body text-sm text-muted mb-2">Email *</label>
                                         <div className="relative">
-                                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} />
+                                            <Mail className="input-icon" size={18} />
                                             <input
                                                 type="email"
                                                 value={formData.email}
@@ -105,7 +105,7 @@ export default function BookPage() {
                                 <div>
                                     <label className="block font-body text-sm text-muted mb-2">Phone *</label>
                                     <div className="relative">
-                                        <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} />
+                                        <Phone className="input-icon" size={18} />
                                         <input
                                             type="tel"
                                             value={formData.phone}
@@ -122,7 +122,7 @@ export default function BookPage() {
                                     <div>
                                         <label className="block font-body text-sm text-muted mb-2">Date *</label>
                                         <div className="relative">
-                                            <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} />
+                                            <Calendar className="input-icon" size={18} />
                                             <input
                                                 type="date"
                                                 value={formData.date}
@@ -135,7 +135,7 @@ export default function BookPage() {
                                     <div>
                                         <label className="block font-body text-sm text-muted mb-2">Time *</label>
                                         <div className="relative">
-                                            <Clock className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} />
+                                            <Clock className="input-icon" size={18} />
                                             <select
                                                 value={formData.time}
                                                 onChange={(e) => setFormData({ ...formData, time: e.target.value })}
@@ -156,7 +156,7 @@ export default function BookPage() {
                                     <div>
                                         <label className="block font-body text-sm text-muted mb-2">Guests *</label>
                                         <div className="relative">
-                                            <Users className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} />
+                                            <Users className="input-icon" size={18} />
                                             <select
                                                 value={formData.guests}
                                                 onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
@@ -171,7 +171,7 @@ export default function BookPage() {
                                     <div>
                                         <label className="block font-body text-sm text-muted mb-2">Occasion</label>
                                         <div className="relative">
-                                            <PartyPopper className="absolute left-4 top-1/2 -translate-y-1/2 text-muted" size={18} />
+                                            <PartyPopper className="input-icon" size={18} />
                                             <select
                                                 value={formData.occasion}
                                                 onChange={(e) => setFormData({ ...formData, occasion: e.target.value })}
