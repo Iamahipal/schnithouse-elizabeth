@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Calendar, Clock, Users, User, Phone, Mail, PartyPopper, ExternalLink } from "lucide-react";
+import { PartyPopper, ExternalLink, ChevronDown } from "lucide-react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -72,74 +72,61 @@ export default function BookPage() {
                                 {/* Name & Email */}
                                 <div className="grid sm:grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block font-body text-sm text-muted mb-2">Name *</label>
-                                        <div className="relative">
-                                            <User className="input-icon" size={18} />
-                                            <input
-                                                type="text"
-                                                value={formData.name}
-                                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                                placeholder="Your name"
-                                                className="input-field pl-11"
-                                                required
-                                            />
-                                        </div>
+                                        <label className="block font-body text-sm font-medium text-foreground mb-2">Name *</label>
+                                        <input
+                                            type="text"
+                                            value={formData.name}
+                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                            placeholder="Your name"
+                                            className="input-field"
+                                            required
+                                        />
                                     </div>
                                     <div>
-                                        <label className="block font-body text-sm text-muted mb-2">Email *</label>
-                                        <div className="relative">
-                                            <Mail className="input-icon" size={18} />
-                                            <input
-                                                type="email"
-                                                value={formData.email}
-                                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                                placeholder="your@email.com"
-                                                className="input-field pl-11"
-                                                required
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Phone */}
-                                <div>
-                                    <label className="block font-body text-sm text-muted mb-2">Phone *</label>
-                                    <div className="relative">
-                                        <Phone className="input-icon" size={18} />
+                                        <label className="block font-body text-sm font-medium text-foreground mb-2">Email *</label>
                                         <input
-                                            type="tel"
-                                            value={formData.phone}
-                                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                            placeholder="Your phone number"
-                                            className="input-field pl-11"
+                                            type="email"
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                            placeholder="your@email.com"
+                                            className="input-field"
                                             required
                                         />
                                     </div>
                                 </div>
 
+                                {/* Phone */}
+                                <div>
+                                    <label className="block font-body text-sm font-medium text-foreground mb-2">Phone *</label>
+                                    <input
+                                        type="tel"
+                                        value={formData.phone}
+                                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                        placeholder="Your phone number"
+                                        className="input-field"
+                                        required
+                                    />
+                                </div>
+
                                 {/* Date & Time */}
                                 <div className="grid sm:grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block font-body text-sm text-muted mb-2">Date *</label>
-                                        <div className="relative">
-                                            <Calendar className="input-icon" size={18} />
-                                            <input
-                                                type="date"
-                                                value={formData.date}
-                                                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                                                className="input-field pl-11"
-                                                required
-                                            />
-                                        </div>
+                                        <label className="block font-body text-sm font-medium text-foreground mb-2">Date *</label>
+                                        <input
+                                            type="date"
+                                            value={formData.date}
+                                            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                                            className="input-field"
+                                            required
+                                        />
                                     </div>
                                     <div>
-                                        <label className="block font-body text-sm text-muted mb-2">Time *</label>
+                                        <label className="block font-body text-sm font-medium text-foreground mb-2">Time *</label>
                                         <div className="relative">
-                                            <Clock className="input-icon" size={18} />
                                             <select
                                                 value={formData.time}
                                                 onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                                                className="input-field pl-11 appearance-none cursor-pointer"
+                                                className="input-field appearance-none cursor-pointer pr-10"
                                                 required
                                             >
                                                 <option value="">Select time</option>
@@ -147,6 +134,7 @@ export default function BookPage() {
                                                     <option key={t} value={t}>{t}</option>
                                                 ))}
                                             </select>
+                                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none" size={18} />
                                         </div>
                                     </div>
                                 </div>
@@ -154,28 +142,27 @@ export default function BookPage() {
                                 {/* Guests & Occasion */}
                                 <div className="grid sm:grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block font-body text-sm text-muted mb-2">Guests *</label>
+                                        <label className="block font-body text-sm font-medium text-foreground mb-2">Guests *</label>
                                         <div className="relative">
-                                            <Users className="input-icon" size={18} />
                                             <select
                                                 value={formData.guests}
                                                 onChange={(e) => setFormData({ ...formData, guests: e.target.value })}
-                                                className="input-field pl-11 appearance-none cursor-pointer"
+                                                className="input-field appearance-none cursor-pointer pr-10"
                                             >
                                                 {[1, 2, 3, 4, 5, 6, 7, 8, "9+"].map((n) => (
                                                     <option key={n} value={n}>{n} {n === 1 ? "Guest" : "Guests"}</option>
                                                 ))}
                                             </select>
+                                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none" size={18} />
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="block font-body text-sm text-muted mb-2">Occasion</label>
+                                        <label className="block font-body text-sm font-medium text-foreground mb-2">Occasion</label>
                                         <div className="relative">
-                                            <PartyPopper className="input-icon" size={18} />
                                             <select
                                                 value={formData.occasion}
                                                 onChange={(e) => setFormData({ ...formData, occasion: e.target.value })}
-                                                className="input-field pl-11 appearance-none cursor-pointer"
+                                                className="input-field appearance-none cursor-pointer pr-10"
                                             >
                                                 <option value="">Select occasion</option>
                                                 <option value="birthday">Birthday</option>
@@ -184,13 +171,14 @@ export default function BookPage() {
                                                 <option value="business">Business</option>
                                                 <option value="other">Other</option>
                                             </select>
+                                            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-muted pointer-events-none" size={18} />
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Notes */}
                                 <div>
-                                    <label className="block font-body text-sm text-muted mb-2">Special Requests</label>
+                                    <label className="block font-body text-sm font-medium text-foreground mb-2">Special Requests</label>
                                     <textarea
                                         value={formData.notes}
                                         onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
