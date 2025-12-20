@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,15 +18,11 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
 
-    const { scrollY } = useScroll();
-    const blurValue = useTransform(scrollY, [0, 100], [0, 12]);
-    const bgOpacity = useTransform(scrollY, [0, 100], [0.7, 0.95]);
-
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
@@ -49,25 +45,23 @@ export default function Navbar() {
 
     return (
         <>
-            {/* Navbar */}
-            <motion.nav
-                className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${scrolled
-                    ? "bg-white/95 shadow-md"
-                    : "bg-white/80"
+            {/* Navbar - Simple, performant */}
+            <nav
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${scrolled
+                        ? "bg-white shadow-md"
+                        : "bg-white/90 backdrop-blur-sm"
                     }`}
-                style={{
-                    backdropFilter: scrolled ? "blur(12px)" : "blur(8px)",
-                    WebkitBackdropFilter: scrolled ? "blur(12px)" : "blur(8px)",
-                }}
             >
-                <div className="container-custom">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16 md:h-20">
                         {/* Logo */}
                         <Link href="/" className="flex items-center gap-2 min-h-[44px]">
-                            <span className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-brand-black">
+                            <span className="font-display text-xl sm:text-2xl font-bold text-gray-900">
                                 Schnithouse
                             </span>
-                            <span className="text-brand-red text-xs md:text-sm font-body hidden sm:inline">Elizabeth</span>
+                            <span className="text-red-600 text-xs sm:text-sm hidden sm:inline">
+                                Elizabeth
+                            </span>
                         </Link>
 
                         {/* Desktop Nav */}
@@ -76,9 +70,9 @@ export default function Navbar() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className={`font-body font-medium transition-colors link-hover py-2 ${pathname === link.href
-                                        ? "text-brand-red"
-                                        : "text-foreground hover:text-brand-red"
+                                    className={`font-medium transition-colors py-2 ${pathname === link.href
+                                            ? "text-red-600"
+                                            : "text-gray-700 hover:text-red-600"
                                         }`}
                                 >
                                     {link.label}
@@ -87,17 +81,17 @@ export default function Navbar() {
                         </div>
 
                         {/* Desktop CTA */}
-                        <div className="hidden md:flex items-center gap-3 lg:gap-4">
+                        <div className="hidden md:flex items-center gap-4">
                             <a
                                 href="tel:0882559000"
-                                className="flex items-center gap-2 text-muted hover:text-brand-red transition-colors font-body min-h-[44px] px-2"
+                                className="flex items-center gap-2 text-gray-600 hover:text-red-600 transition-colors min-h-[44px]"
                             >
                                 <Phone size={18} />
                                 <span className="hidden lg:inline">08 8255 9000</span>
                             </a>
                             <Link
                                 href="/menu"
-                                className="btn-primary-glow text-sm lg:text-base px-4 lg:px-6"
+                                className="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-colors min-h-[44px] flex items-center"
                             >
                                 Order Online
                             </Link>
@@ -106,7 +100,7 @@ export default function Navbar() {
                         {/* Mobile Menu Button */}
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="md:hidden p-3 text-foreground hover:text-brand-red transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                            className="md:hidden p-3 text-gray-700 min-w-[44px] min-h-[44px] flex items-center justify-center"
                             aria-label="Toggle menu"
                             aria-expanded={isOpen}
                         >
@@ -114,9 +108,9 @@ export default function Navbar() {
                         </button>
                     </div>
                 </div>
-            </motion.nav>
+            </nav>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu */}
             <AnimatePresence>
                 {isOpen && (
                     <>
@@ -126,7 +120,7 @@ export default function Navbar() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setIsOpen(false)}
-                            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 md:hidden"
+                            className="fixed inset-0 bg-black/30 z-40 md:hidden"
                         />
 
                         {/* Menu Panel */}
@@ -134,18 +128,18 @@ export default function Navbar() {
                             initial={{ x: "100%" }}
                             animate={{ x: 0 }}
                             exit={{ x: "100%" }}
-                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="fixed top-0 right-0 bottom-0 w-[280px] md:w-72 bg-white shadow-2xl z-50 md:hidden safe-top"
+                            transition={{ type: "tween", duration: 0.25 }}
+                            className="fixed top-0 right-0 bottom-0 w-[280px] bg-white shadow-xl z-50 md:hidden"
                         >
                             <div className="flex flex-col h-full">
                                 {/* Header */}
-                                <div className="flex items-center justify-between p-4 border-b border-gray-100">
-                                    <span className="font-display text-xl font-bold text-brand-black">
+                                <div className="flex items-center justify-between p-4 border-b">
+                                    <span className="font-display text-xl font-bold">
                                         Menu
                                     </span>
                                     <button
                                         onClick={() => setIsOpen(false)}
-                                        className="p-2 text-muted hover:text-foreground transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+                                        className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
                                         aria-label="Close menu"
                                     >
                                         <X size={24} />
@@ -154,36 +148,33 @@ export default function Navbar() {
 
                                 {/* Links */}
                                 <div className="flex-1 py-4">
-                                    {navLinks.map((link, index) => (
-                                        <motion.div
+                                    {navLinks.map((link) => (
+                                        <Link
                                             key={link.href}
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: index * 0.08 }}
+                                            href={link.href}
+                                            className={`flex items-center px-6 py-4 font-medium text-lg min-h-[56px] ${pathname === link.href
+                                                    ? "text-red-600 bg-red-50"
+                                                    : "text-gray-700 hover:bg-gray-50"
+                                                }`}
                                         >
-                                            <Link
-                                                href={link.href}
-                                                className={`flex items-center px-6 py-4 font-body font-medium text-lg border-b border-gray-50 transition-colors min-h-[56px] ${pathname === link.href
-                                                    ? "text-brand-red bg-brand-red-light/50"
-                                                    : "text-foreground hover:text-brand-red hover:bg-gray-50"
-                                                    }`}
-                                            >
-                                                {link.label}
-                                            </Link>
-                                        </motion.div>
+                                            {link.label}
+                                        </Link>
                                     ))}
                                 </div>
 
                                 {/* Footer */}
-                                <div className="p-6 border-t border-gray-100 space-y-4 safe-bottom">
+                                <div className="p-6 border-t space-y-4">
                                     <a
                                         href="tel:0882559000"
-                                        className="flex items-center gap-3 text-foreground font-body font-medium min-h-[44px]"
+                                        className="flex items-center gap-3 text-gray-700 font-medium min-h-[44px]"
                                     >
-                                        <Phone size={20} className="text-brand-red" />
+                                        <Phone size={20} className="text-red-600" />
                                         08 8255 9000
                                     </a>
-                                    <Link href="/menu" className="btn-primary-glow w-full text-center">
+                                    <Link
+                                        href="/menu"
+                                        className="block w-full text-center px-5 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg min-h-[48px]"
+                                    >
                                         Order Online
                                     </Link>
                                 </div>
@@ -193,9 +184,8 @@ export default function Navbar() {
                 )}
             </AnimatePresence>
 
-            {/* Spacer for fixed navbar */}
+            {/* Spacer */}
             <div className="h-16 md:h-20" />
         </>
     );
 }
-

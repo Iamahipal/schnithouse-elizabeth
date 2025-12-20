@@ -1,13 +1,12 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Coffee, Users, Coins } from "lucide-react";
+import { motion } from "framer-motion";
+import { UtensilsCrossed, Users, Wallet } from "lucide-react";
 import Image from "next/image";
-import { useRef } from "react";
 
 const features = [
     {
-        icon: Coffee,
+        icon: UtensilsCrossed,
         title: "Healthy & Tasty",
         description: "Fresh ingredients, cooked to perfection daily",
     },
@@ -17,125 +16,107 @@ const features = [
         description: "Professional service with a warm smile",
     },
     {
-        icon: Coins,
+        icon: Wallet,
         title: "Affordable",
         description: "Premium quality at family-friendly prices",
     },
 ];
 
 export default function About() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end start"],
-    });
-
-    const imageScale = useTransform(scrollYProgress, [0, 0.5], [0.9, 1]);
-    const imageOpacity = useTransform(scrollYProgress, [0, 0.3], [0.6, 1]);
-
     return (
-        <section ref={containerRef} className="section-padding bg-white">
-            <div className="container-custom">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    {/* Content */}
+        <section className="py-16 md:py-24 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                    {/* Content - No horizontal scroll */}
                     <motion.div
-                        initial={{ opacity: 0, x: -30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.5 }}
                         className="order-2 lg:order-1"
                     >
-                        <span className="text-brand-red font-body font-semibold text-sm uppercase tracking-wider">
+                        <span className="text-red-600 font-semibold text-sm uppercase tracking-wider">
                             Welcome to Schnithouse
                         </span>
-                        <h2 className="font-display text-fluid-4xl font-bold text-foreground mt-2 mb-6">
+                        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6 leading-tight">
                             A Unique Adelaide{" "}
-                            <span className="text-brand-red">Dining Experience</span>
+                            <span className="text-red-600">Dining Experience</span>
                         </h2>
-                        <p className="font-body text-muted text-fluid-base leading-relaxed mb-6">
+                        <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-4">
                             As a prominent name among the best places to eat in Adelaide,
                             Schnithouse Elizabeth is more than just a food haven. We've carved
                             a niche as a family-friendly destination where every member of the
                             family, regardless of age, can have an enriching and enjoyable time.
                         </p>
-                        <p className="font-body text-muted text-fluid-base leading-relaxed mb-10">
+                        <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-8">
                             Our Little Schnitters activity packs keep the young ones entertained,
                             allowing adults to savor their meal and perhaps enjoy a sip from our
                             extensive collection of local and imported craft beers.
                         </p>
 
-                        {/* Features Grid with glassmorphism */}
-                        <div className="grid sm:grid-cols-3 gap-4 md:gap-6">
+                        {/* Features Grid - Vertical on mobile, horizontal on larger screens */}
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                             {features.map((feature, index) => (
                                 <motion.div
                                     key={feature.title}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 15 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{
-                                        delay: index * 0.15,
-                                        duration: 0.5,
-                                        ease: "easeOut"
+                                        delay: index * 0.1,
+                                        duration: 0.4
                                     }}
-                                    whileHover={{
-                                        y: -4,
-                                        transition: { duration: 0.2 }
-                                    }}
-                                    className="text-center sm:text-left p-4 rounded-xl bg-surface/50 border border-gray-100 hover:shadow-premium transition-all duration-300"
+                                    className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100"
                                 >
-                                    <div className="inline-flex items-center justify-center w-12 h-12 gradient-red rounded-xl mb-3 shadow-md">
-                                        <feature.icon className="text-white" size={22} />
+                                    <div className="flex items-center justify-center w-12 h-12 bg-red-600 rounded-xl shrink-0">
+                                        <feature.icon className="text-white" size={24} />
                                     </div>
-                                    <h3 className="font-display font-bold text-foreground mb-1">
-                                        {feature.title}
-                                    </h3>
-                                    <p className="font-body text-sm text-muted">
-                                        {feature.description}
-                                    </p>
+                                    <div className="sm:text-center">
+                                        <h3 className="font-display font-bold text-gray-900 mb-1">
+                                            {feature.title}
+                                        </h3>
+                                        <p className="text-sm text-gray-600">
+                                            {feature.description}
+                                        </p>
+                                    </div>
                                 </motion.div>
                             ))}
                         </div>
                     </motion.div>
 
-                    {/* Image with parallax */}
+                    {/* Image - HD quality */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
                         className="order-1 lg:order-2"
-                        style={{ scale: imageScale, opacity: imageOpacity }}
                     >
-                        <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-premium-lg">
+                        <div className="relative aspect-[4/5] sm:aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl">
                             <Image
-                                src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80"
+                                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=90"
                                 alt="Schnithouse restaurant interior"
                                 fill
                                 className="object-cover"
                                 sizes="(max-width: 1024px) 100vw, 50vw"
+                                quality={90}
                             />
-                            {/* Floating card with liquid glass */}
-                            <motion.div
-                                className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 liquid-glass rounded-xl p-4 shadow-lg"
-                                initial={{ y: 20, opacity: 0 }}
-                                whileInView={{ y: 0, opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.4, duration: 0.5 }}
-                            >
+                            {/* Floating info card */}
+                            <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur rounded-xl p-4 shadow-lg">
                                 <div className="flex items-center gap-4">
-                                    <div className="w-14 h-14 md:w-16 md:h-16 gradient-red rounded-xl flex items-center justify-center text-white text-2xl shadow-md shrink-0">
+                                    <div className="w-14 h-14 bg-red-600 rounded-xl flex items-center justify-center text-white text-2xl shrink-0">
                                         🍖
                                     </div>
                                     <div>
-                                        <p className="font-display font-bold text-white text-sm md:text-base">
+                                        <p className="font-display font-bold text-gray-900 text-sm sm:text-base">
                                             5 Types of Schnitzels
                                         </p>
-                                        <p className="font-body text-xs md:text-sm text-white/80">
+                                        <p className="text-xs sm:text-sm text-gray-600">
                                             Chicken • Beef • Pork • Fish • Veg
                                         </p>
                                     </div>
                                 </div>
-                            </motion.div>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
@@ -143,4 +124,3 @@ export default function About() {
         </section>
     );
 }
-
