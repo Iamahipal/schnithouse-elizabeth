@@ -16,14 +16,13 @@ export default function Hero() {
                     loop
                     playsInline
                     className="absolute inset-0 w-full h-full object-cover"
-                    poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=85"
+                    poster="https://images.unsplash.com/photo-1599921841143-819065a55cc6?w=1920&q=85"
                 >
-                    {/* Pexels royalty-free restaurant/food ambiance video */}
+                    {/* HD Premium restaurant/food video from Pexels */}
                     <source
-                        src="https://videos.pexels.com/video-files/3298572/3298572-uhd_2560_1440_30fps.mp4"
+                        src="https://videos.pexels.com/video-files/5875797/5875797-uhd_2560_1440_25fps.mp4"
                         type="video/mp4"
                     />
-                    {/* Fallback for browsers that don't support video */}
                     Your browser does not support the video tag.
                 </video>
 

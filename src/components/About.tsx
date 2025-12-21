@@ -107,8 +107,8 @@ export default function About() {
                     >
                         <div className="image-container aspect-4-5 sm:aspect-3-4">
                             <Image
-                                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=90"
-                                alt="Schnithouse restaurant interior"
+                                src="/schnithouse-building.jpg"
+                                alt="Schnithouse Elizabeth restaurant exterior"
                                 fill
                                 className="object-cover"
                                 sizes="(max-width: 1024px) 100vw, 50vw"
