@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
 
 export default function Footer() {
@@ -11,11 +12,20 @@ export default function Footer() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
                     {/* Brand */}
                     <div className="lg:col-span-1">
-                        <Link href="/" className="inline-block mb-4 group">
-                            <span className="font-display text-3xl font-bold text-white group-hover:text-gray-200 transition-colors">
-                                Schnithouse
-                            </span>
-                            <span className="text-brand-red text-sm font-body ml-2">Elizabeth</span>
+                        <Link href="/" className="inline-flex items-center gap-3 mb-4 group">
+                            <Image
+                                src="/logo.png"
+                                alt="Schnithouse Logo"
+                                width={80}
+                                height={80}
+                                className="w-16 h-16 md:w-20 md:h-20 object-contain brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all duration-300"
+                            />
+                            <div>
+                                <span className="font-display text-2xl md:text-3xl font-bold text-white group-hover:text-gray-200 transition-colors block">
+                                    Schnithouse
+                                </span>
+                                <span className="text-brand-red text-sm font-body">Elizabeth</span>
+                            </div>
                         </Link>
                         <p className="font-body text-gray-400 text-sm leading-relaxed mb-6">
                             A gastronomic experience that is second to none!

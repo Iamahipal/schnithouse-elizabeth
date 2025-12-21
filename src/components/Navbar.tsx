@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
@@ -48,20 +49,30 @@ export default function Navbar() {
             {/* Navbar - Simple, performant */}
             <nav
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${scrolled
-                        ? "bg-white shadow-md"
-                        : "bg-white/90 backdrop-blur-sm"
+                    ? "bg-white shadow-md"
+                    : "bg-white/90 backdrop-blur-sm"
                     }`}
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16 md:h-20">
-                        {/* Logo */}
+                        {/* Logo with Brand Icon */}
                         <Link href="/" className="flex items-center gap-2 min-h-[44px]">
-                            <span className="font-display text-xl sm:text-2xl font-bold text-gray-900">
-                                Schnithouse
-                            </span>
-                            <span className="text-red-600 text-xs sm:text-sm hidden sm:inline">
-                                Elizabeth
-                            </span>
+                            <Image
+                                src="/logo.png"
+                                alt="Schnithouse Logo"
+                                width={48}
+                                height={48}
+                                className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                                priority
+                            />
+                            <div className="flex flex-col">
+                                <span className="font-display text-lg sm:text-xl md:text-2xl font-bold text-gray-900 leading-tight">
+                                    Schnithouse
+                                </span>
+                                <span className="text-red-600 text-[10px] sm:text-xs font-medium -mt-0.5 hidden sm:block">
+                                    Elizabeth
+                                </span>
+                            </div>
                         </Link>
 
                         {/* Desktop Nav */}
@@ -71,8 +82,8 @@ export default function Navbar() {
                                     key={link.href}
                                     href={link.href}
                                     className={`font-medium transition-colors py-2 ${pathname === link.href
-                                            ? "text-red-600"
-                                            : "text-gray-700 hover:text-red-600"
+                                        ? "text-red-600"
+                                        : "text-gray-700 hover:text-red-600"
                                         }`}
                                 >
                                     {link.label}
@@ -132,11 +143,20 @@ export default function Navbar() {
                             className="fixed top-0 right-0 bottom-0 w-[280px] bg-white shadow-xl z-50 md:hidden"
                         >
                             <div className="flex flex-col h-full">
-                                {/* Header */}
+                                {/* Header with Logo */}
                                 <div className="flex items-center justify-between p-4 border-b">
-                                    <span className="font-display text-xl font-bold">
-                                        Menu
-                                    </span>
+                                    <div className="flex items-center gap-2">
+                                        <Image
+                                            src="/logo.png"
+                                            alt="Schnithouse Logo"
+                                            width={40}
+                                            height={40}
+                                            className="w-10 h-10 object-contain"
+                                        />
+                                        <span className="font-display text-xl font-bold">
+                                            Menu
+                                        </span>
+                                    </div>
                                     <button
                                         onClick={() => setIsOpen(false)}
                                         className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
@@ -153,8 +173,8 @@ export default function Navbar() {
                                             key={link.href}
                                             href={link.href}
                                             className={`flex items-center px-6 py-4 font-medium text-lg min-h-[56px] ${pathname === link.href
-                                                    ? "text-red-600 bg-red-50"
-                                                    : "text-gray-700 hover:bg-gray-50"
+                                                ? "text-red-600 bg-red-50"
+                                                : "text-gray-700 hover:bg-gray-50"
                                                 }`}
                                         >
                                             {link.label}

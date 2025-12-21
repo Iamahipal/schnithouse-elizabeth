@@ -19,12 +19,15 @@ const config: Config = {
                 // Text
                 foreground: '#1F2937',
                 muted: '#6B7280',
-                // Brand colors (black + red)
+                // Brand colors (black + red + gold)
                 brand: {
                     black: '#0F0F0F',
                     red: '#DC2626',
                     'red-dark': '#B91C1C',
                     'red-light': '#FEE2E2',
+                    gold: '#F59E0B',
+                    'gold-light': '#FCD34D',
+                    'gold-dark': '#D97706',
                 },
                 // Glass colors for modern effects
                 glass: {
