@@ -2,9 +2,11 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import SignatureDish from "@/components/SignatureDish";
+import Testimonials from "@/components/Testimonials";
 import Promotions from "@/components/Promotions";
 import Partners from "@/components/Partners";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
     return (
@@ -13,9 +15,11 @@ export default function Home() {
             <Hero />
             <About />
             <SignatureDish />
+            <Testimonials />
             <Promotions />
             <Partners />
             <Footer />
+            <BackToTop />
         </main>
     );
 }

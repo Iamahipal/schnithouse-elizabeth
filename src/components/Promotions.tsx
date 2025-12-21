@@ -12,6 +12,8 @@ const promotions = [
         description: "Dine-In Only",
         gradient: "from-red-600 via-red-500 to-rose-600",
         glowColor: "rgba(220, 38, 38, 0.4)",
+        textColor: "text-white",
+        subtextColor: "text-white/80",
         Icon: Utensils,
     },
     {
@@ -20,6 +22,8 @@ const promotions = [
         description: "Dine-In Only • Conditions Apply",
         gradient: "from-amber-500 via-orange-500 to-amber-600",
         glowColor: "rgba(245, 158, 11, 0.4)",
+        textColor: "text-white",
+        subtextColor: "text-white/80",
         Icon: Utensils,
     },
     {
@@ -29,21 +33,26 @@ const promotions = [
         description: "Dine-In Only",
         gradient: "from-rose-600 via-red-600 to-red-700",
         glowColor: "rgba(225, 29, 72, 0.4)",
+        textColor: "text-white",
+        subtextColor: "text-white/80",
         Icon: Sun,
     },
     {
+        // ACCESSIBILITY FIX: Dark text on light yellow background
         title: "Happy Hour",
         subtitle: "Everyday 3PM-6PM",
         description: "$4 Imperial • $5 House Wine",
-        gradient: "from-amber-400 via-yellow-500 to-amber-500",
+        gradient: "from-amber-300 via-yellow-300 to-amber-400",
         glowColor: "rgba(234, 179, 8, 0.4)",
+        textColor: "text-amber-900", // Dark text for WCAG compliance
+        subtextColor: "text-amber-800/80",
         Icon: Beer,
     },
 ];
 
 export default function Promotions() {
     return (
-        <section className="py-16 md:py-24 bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden">
+        <section id="promotions" className="py-16 md:py-24 bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden scroll-mt-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <motion.div
@@ -84,15 +93,15 @@ export default function Promotions() {
                                 <div className={`absolute inset-0 bg-gradient-to-br ${promo.gradient}`} />
 
                                 {/* Glass overlay for depth */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/10" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/10" />
 
                                 {/* Shine effect on hover */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
 
                                 {/* Content */}
-                                <div className="relative p-6 h-full text-white flex flex-col">
+                                <div className={`relative p-6 h-full flex flex-col ${promo.textColor}`}>
                                     {/* Icon with glass background */}
-                                    <div className="w-11 h-11 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-4 shadow-inner border border-white/20">
+                                    <div className={`w-11 h-11 ${promo.textColor === 'text-amber-900' ? 'bg-amber-900/20' : 'bg-white/20'} backdrop-blur-sm rounded-xl flex items-center justify-center mb-4 shadow-inner border ${promo.textColor === 'text-amber-900' ? 'border-amber-900/20' : 'border-white/20'}`}>
                                         <promo.Icon size={22} className="drop-shadow-sm" />
                                     </div>
 
@@ -101,7 +110,7 @@ export default function Promotions() {
                                     </h3>
 
                                     {promo.subtitle && (
-                                        <p className="text-white/95 font-semibold text-sm mb-2 drop-shadow-sm">
+                                        <p className={`${promo.subtextColor} font-semibold text-sm mb-2 drop-shadow-sm`}>
                                             {promo.subtitle}
                                         </p>
                                     )}
@@ -113,13 +122,13 @@ export default function Promotions() {
                                     )}
 
                                     {promo.time && (
-                                        <p className="text-white/80 text-sm mb-2 flex items-center gap-1.5">
+                                        <p className={`${promo.subtextColor} text-sm mb-2 flex items-center gap-1.5`}>
                                             <Clock size={14} className="opacity-80" />
                                             {promo.time}
                                         </p>
                                     )}
 
-                                    <p className="text-white/70 text-sm mt-auto">
+                                    <p className={`${promo.subtextColor} text-sm mt-auto`}>
                                         {promo.description}
                                     </p>
                                 </div>
@@ -128,7 +137,7 @@ export default function Promotions() {
                     ))}
                 </div>
 
-                {/* CTA */}
+                {/* CTA - Standardized as outline/ghost button */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -138,7 +147,7 @@ export default function Promotions() {
                 >
                     <Link
                         href="/book"
-                        className="group inline-flex items-center gap-2 text-red-600 font-semibold hover:text-red-700 transition-colors min-h-[44px]"
+                        className="group inline-flex items-center gap-2 px-6 py-3 border-2 border-red-600 text-red-600 font-semibold rounded-xl hover:bg-red-600 hover:text-white transition-all duration-300 min-h-[48px]"
                     >
                         Book Your Table Now
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />

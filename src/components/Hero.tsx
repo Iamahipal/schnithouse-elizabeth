@@ -19,8 +19,10 @@ export default function Hero() {
                     sizes="100vw"
                     quality={85}
                 />
-                {/* Strong gradient for text visibility */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+                {/* Stronger gradient overlay (25-35% black) for text legibility - Audit recommendation */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+                {/* Additional vignette for focus on center text */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
             </div>
 
             {/* Content */}

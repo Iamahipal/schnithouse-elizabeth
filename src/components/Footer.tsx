@@ -47,7 +47,7 @@ export default function Footer() {
                     {/* Quick Links */}
                     <div>
                         <h3 className="font-display font-bold text-lg mb-5 text-white">Quick Links</h3>
-                        <ul className="space-y-3">
+                        <ul className="space-y-3.5">
                             {["Home", "Menu", "Book", "Contact"].map((link) => (
                                 <li key={link}>
                                     <Link
@@ -109,7 +109,7 @@ export default function Footer() {
                             <div className="w-8 h-8 bg-brand-red/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
                                 <Clock size={16} className="text-brand-red" />
                             </div>
-                            <div className="font-body text-sm text-gray-400 space-y-1.5">
+                            <div className="font-body text-sm text-gray-400 space-y-2 leading-relaxed">
                                 <p className="flex justify-between gap-4">
                                     <span className="text-gray-500">Sun – Wed</span>
                                     <span className="text-gray-300">11:00 AM – 8:00 PM</span>
@@ -124,9 +124,10 @@ export default function Footer() {
                                 </p>
                             </div>
                         </div>
+                        {/* Outline style for CTA consistency - Audit recommendation */}
                         <Link
                             href="/book"
-                            className="inline-flex items-center justify-center w-full mt-2 px-6 py-3 bg-brand-red text-white font-body font-semibold rounded-lg hover:bg-brand-red-dark hover:shadow-lg hover:shadow-red-600/20 transition-all duration-300"
+                            className="inline-flex items-center justify-center w-full mt-2 px-6 py-3 border-2 border-white/30 text-white font-body font-semibold rounded-lg hover:bg-white hover:text-brand-black hover:border-white transition-all duration-300"
                         >
                             Book a Table
                         </Link>
