@@ -52,8 +52,8 @@ const promotions = [
 
 export default function Promotions() {
     return (
-        <section id="promotions" className="py-16 md:py-24 bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden scroll-mt-24">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="promotions" className="section bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden">
+            <div className="container-custom">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -62,18 +62,19 @@ export default function Promotions() {
                     transition={{ duration: 0.5 }}
                     className="text-center mb-12"
                 >
-                    <span className="inline-flex items-center gap-2 text-red-600 font-semibold text-sm uppercase tracking-wider mb-3">
-                        <span className="w-8 h-px bg-red-600/50" />
+                    {/* Section Label - Centered */}
+                    <span className="section-label justify-center mb-3">
+                        <span className="section-label-line" />
                         Special Offers
-                        <span className="w-8 h-px bg-red-600/50" />
+                        <span className="section-label-line" />
                     </span>
-                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-2">
+                    <h2 className="section-title">
                         Promotions
                     </h2>
                 </motion.div>
 
-                {/* Cards Grid - Premium Glassmorphism */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+                {/* Cards Grid */}
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-cards">
                     {promotions.map((promo, index) => (
                         <motion.div
                             key={promo.title}
@@ -92,16 +93,16 @@ export default function Promotions() {
                                 {/* Gradient background */}
                                 <div className={`absolute inset-0 bg-gradient-to-br ${promo.gradient}`} />
 
-                                {/* Glass overlay for depth */}
+                                {/* Glass overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-white/10" />
 
-                                {/* Shine effect on hover */}
+                                {/* Shine effect */}
                                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
 
-                                {/* Content */}
+                                {/* Content - Unified padding */}
                                 <div className={`relative p-6 h-full flex flex-col ${promo.textColor}`}>
-                                    {/* Icon with glass background */}
-                                    <div className={`w-11 h-11 ${promo.textColor === 'text-amber-900' ? 'bg-amber-900/20' : 'bg-white/20'} backdrop-blur-sm rounded-xl flex items-center justify-center mb-4 shadow-inner border ${promo.textColor === 'text-amber-900' ? 'border-amber-900/20' : 'border-white/20'}`}>
+                                    {/* Icon - Unified container */}
+                                    <div className={`icon-container-md ${promo.textColor === 'text-amber-900' ? 'bg-amber-900/20 border-amber-900/20' : 'bg-white/20 border-white/20'} backdrop-blur-sm shadow-inner border mb-4`}>
                                         <promo.Icon size={22} className="drop-shadow-sm" />
                                     </div>
 
@@ -137,7 +138,7 @@ export default function Promotions() {
                     ))}
                 </div>
 
-                {/* CTA - Standardized as outline/ghost button */}
+                {/* CTA - Unified button style */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -145,10 +146,7 @@ export default function Promotions() {
                     transition={{ delay: 0.3 }}
                     className="text-center mt-12"
                 >
-                    <Link
-                        href="/book"
-                        className="group inline-flex items-center gap-2 px-6 py-3 border-2 border-red-600 text-red-600 font-semibold rounded-xl hover:bg-red-600 hover:text-white transition-all duration-300 min-h-[48px]"
-                    >
+                    <Link href="/book" className="btn-outline-red group">
                         Book Your Table Now
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </Link>

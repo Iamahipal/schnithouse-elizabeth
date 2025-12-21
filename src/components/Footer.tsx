@@ -134,10 +134,10 @@ export default function Footer() {
                                 </p>
                             </div>
                         </div>
-                        {/* Outline style for CTA consistency - Audit recommendation */}
+                        {/* CTA - Unified button style with rounded-xl */}
                         <Link
                             href="/book"
-                            className="inline-flex items-center justify-center w-full mt-2 px-6 py-3 border-2 border-white/30 text-white font-body font-semibold rounded-lg hover:bg-white hover:text-brand-black hover:border-white transition-all duration-300"
+                            className="inline-flex items-center justify-center w-full mt-2 px-6 py-3 border-2 border-white/30 text-white font-body font-semibold rounded-xl hover:bg-white hover:text-brand-black hover:border-white transition-all duration-300 min-h-[48px]"
                         >
                             Book a Table
                         </Link>

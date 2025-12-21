@@ -35,8 +35,8 @@ const stats = [
 
 export default function Testimonials() {
     return (
-        <section id="testimonials" className="py-16 md:py-24 bg-gray-50 scroll-mt-24">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="testimonials" className="section section-alt">
+            <div className="container-custom">
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -45,12 +45,13 @@ export default function Testimonials() {
                     transition={{ duration: 0.5 }}
                     className="text-center mb-12"
                 >
-                    <span className="inline-flex items-center gap-2 text-red-600 font-semibold text-sm uppercase tracking-wider mb-3">
-                        <span className="w-8 h-px bg-red-600/50" />
+                    {/* Section Label - Centered with lines on both sides */}
+                    <span className="section-label justify-center mb-3">
+                        <span className="section-label-line" />
                         Customer Reviews
-                        <span className="w-8 h-px bg-red-600/50" />
+                        <span className="section-label-line" />
                     </span>
-                    <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-2">
+                    <h2 className="section-title">
                         What Our Guests Say
                     </h2>
                 </motion.div>
@@ -85,7 +86,7 @@ export default function Testimonials() {
                 </motion.div>
 
                 {/* Testimonials Grid */}
-                <div className="grid md:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-3 gap-cards">
                     {testimonials.map((testimonial, index) => (
                         <motion.div
                             key={index}
@@ -95,7 +96,7 @@ export default function Testimonials() {
                             transition={{ delay: index * 0.1, duration: 0.5 }}
                             className="group"
                         >
-                            <div className="h-full bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div className="card-testimonial h-full flex flex-col">
                                 {/* Quote Icon */}
                                 <Quote className="text-red-100 mb-4" size={32} />
 
@@ -124,7 +125,7 @@ export default function Testimonials() {
                     ))}
                 </div>
 
-                {/* Google Reviews Badge */}
+                {/* Google Reviews Link */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
