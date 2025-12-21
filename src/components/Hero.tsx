@@ -27,7 +27,7 @@ export default function Hero() {
 
             {/* Content */}
             <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-                {/* Premium Badge with Liquid Glass Effect - NO SVG FILTER */}
+                {/* Premium Badge - Apple Liquid Glass Style */}
                 <motion.div
                     initial={{ opacity: 0, y: 20, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -35,25 +35,44 @@ export default function Hero() {
                     className="inline-block mb-8"
                 >
                     <div className="group relative">
-                        {/* Outer glow effect */}
-                        <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 rounded-full opacity-60 blur-lg group-hover:opacity-80 transition-opacity duration-500" />
+                        {/* Apple Liquid Glass Container */}
+                        <div className="relative px-6 py-3.5 rounded-full inline-flex items-center gap-3 overflow-hidden
+                            bg-white/10 backdrop-blur-xl
+                            border border-white/30
+                            shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(255,255,255,0.1)]
+                            hover:bg-white/15 hover:border-white/40
+                            transition-all duration-500
+                        ">
+                            {/* Top highlight reflection - Apple style */}
+                            <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
 
-                        {/* Main badge container with liquid glass effect */}
-                        <div className="relative px-6 py-3.5 rounded-full inline-flex items-center gap-3 overflow-hidden backdrop-blur-md border border-amber-300/50 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_4px_20px_rgba(245,158,11,0.3)]">
-                            {/* Premium gradient background */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-amber-400/95 via-amber-300/95 to-amber-400/95" />
+                            {/* Subtle inner glow */}
+                            <div className="absolute inset-0 rounded-full bg-gradient-to-b from-white/10 to-transparent" />
 
-                            {/* Glass highlight on top */}
-                            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/40 to-transparent rounded-t-full" />
+                            {/* Animated shimmer sweep */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
 
-                            {/* Shimmer animation effect */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+                            {/* Shiny animated sparkle icon */}
+                            <motion.div
+                                animate={{
+                                    rotate: [0, 10, -10, 0],
+                                    scale: [1, 1.15, 1]
+                                }}
+                                transition={{
+                                    duration: 3,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                className="relative z-10"
+                            >
+                                <Sparkles
+                                    className="text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.8)]"
+                                    size={22}
+                                    strokeWidth={2.5}
+                                />
+                            </motion.div>
 
-                            {/* Inner glow */}
-                            <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(255,255,255,0.3)]" />
-
-                            <Sparkles className="relative z-10 text-amber-800 drop-shadow-sm" size={20} />
-                            <span className="relative z-10 font-body font-bold text-amber-900 text-sm md:text-base tracking-wide drop-shadow-sm">
+                            <span className="relative z-10 font-body font-semibold text-white text-sm md:text-base tracking-wide">
                                 90-Year-Old Family Recipe
                             </span>
                         </div>
@@ -101,11 +120,27 @@ export default function Hero() {
                         <span>View Menu</span>
                         <span className="text-lg">→</span>
                     </Link>
+                    {/* Book a Table - Apple Liquid Glass Style */}
                     <Link
                         href="/book"
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/15 backdrop-blur-md border-2 border-white/40 text-white font-semibold rounded-xl transition-all duration-200 hover:bg-white/25 hover:border-white/60 hover:scale-[1.02] active:scale-[0.98] min-h-[56px] min-w-[180px]"
+                        className="group w-full sm:w-auto relative inline-flex items-center justify-center gap-2 px-8 py-4 
+                            bg-white/10 backdrop-blur-xl
+                            border border-white/30 
+                            shadow-[0_8px_32px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.4),inset_0_-1px_0_rgba(255,255,255,0.1)]
+                            text-white font-semibold rounded-xl 
+                            transition-all duration-300 
+                            hover:bg-white/20 hover:border-white/50 hover:scale-[1.02] 
+                            active:scale-[0.98] min-h-[56px] min-w-[180px]
+                            overflow-hidden
+                        "
                     >
-                        Book a Table
+                        {/* Top highlight */}
+                        <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+
+                        {/* Shimmer sweep on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+
+                        <span className="relative z-10">Book a Table</span>
                     </Link>
                 </motion.div>
             </div>
