@@ -9,16 +9,19 @@ const features = [
         icon: UtensilsCrossed,
         title: "Healthy & Tasty",
         description: "Fresh ingredients, cooked to perfection daily",
+        gradient: "from-red-500 to-rose-600",
     },
     {
         icon: Users,
         title: "Friendly Staff",
         description: "Professional service with a warm smile",
+        gradient: "from-amber-500 to-orange-500",
     },
     {
         icon: Wallet,
         title: "Affordable",
         description: "Premium quality at family-friendly prices",
+        gradient: "from-green-500 to-emerald-600",
     },
 ];
 
@@ -35,10 +38,11 @@ export default function About() {
                         transition={{ duration: 0.5 }}
                         className="order-2 lg:order-1"
                     >
-                        <span className="text-red-600 font-semibold text-sm uppercase tracking-wider">
+                        <span className="inline-flex items-center gap-2 text-red-600 font-semibold text-sm uppercase tracking-wider">
+                            <span className="w-6 h-px bg-red-600/50" />
                             Welcome to Schnithouse
                         </span>
-                        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6 leading-tight">
+                        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-3 mb-6 leading-tight">
                             A Unique Adelaide{" "}
                             <span className="text-red-600">Dining Experience</span>
                         </h2>
@@ -54,7 +58,7 @@ export default function About() {
                             extensive collection of local and imported craft beers.
                         </p>
 
-                        {/* Features Grid - Vertical on mobile, horizontal on larger screens */}
+                        {/* Features Grid - Premium Cards */}
                         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                             {features.map((feature, index) => (
                                 <motion.div
@@ -66,18 +70,21 @@ export default function About() {
                                         delay: index * 0.1,
                                         duration: 0.4
                                     }}
-                                    className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100"
+                                    className="group"
                                 >
-                                    <div className="flex items-center justify-center w-12 h-12 bg-red-600 rounded-xl shrink-0">
-                                        <feature.icon className="text-white" size={24} />
-                                    </div>
-                                    <div className="sm:text-center">
-                                        <h3 className="font-display font-bold text-gray-900 mb-1">
-                                            {feature.title}
-                                        </h3>
-                                        <p className="text-sm text-gray-600">
-                                            {feature.description}
-                                        </p>
+                                    <div className="flex sm:flex-col items-center sm:items-center gap-4 sm:gap-3 p-5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                                        {/* Gradient icon background */}
+                                        <div className={`flex items-center justify-center w-12 h-12 bg-gradient-to-br ${feature.gradient} rounded-xl shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                                            <feature.icon className="text-white" size={24} />
+                                        </div>
+                                        <div className="sm:text-center">
+                                            <h3 className="font-display font-bold text-gray-900 mb-1">
+                                                {feature.title}
+                                            </h3>
+                                            <p className="text-sm text-gray-600">
+                                                {feature.description}
+                                            </p>
+                                        </div>
                                     </div>
                                 </motion.div>
                             ))}
@@ -101,22 +108,34 @@ export default function About() {
                                 sizes="(max-width: 1024px) 100vw, 50vw"
                                 quality={90}
                             />
-                            {/* Floating info card */}
-                            <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur rounded-xl p-4 shadow-lg">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-14 h-14 bg-red-600 rounded-xl flex items-center justify-center text-white text-2xl shrink-0">
-                                        🍖
-                                    </div>
-                                    <div>
-                                        <p className="font-display font-bold text-gray-900 text-sm sm:text-base">
-                                            5 Types of Schnitzels
-                                        </p>
-                                        <p className="text-xs sm:text-sm text-gray-600">
-                                            Chicken • Beef • Pork • Fish • Veg
-                                        </p>
+
+                            {/* Premium Floating info card with glass effect */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.4 }}
+                                className="absolute bottom-4 left-4 right-4"
+                            >
+                                <div className="relative bg-white/95 backdrop-blur-md rounded-xl p-4 shadow-xl border border-white/50">
+                                    {/* Subtle glass highlight */}
+                                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-14 h-14 bg-gradient-to-br from-red-500 to-rose-600 rounded-xl flex items-center justify-center text-white text-2xl shrink-0 shadow-lg">
+                                            🍖
+                                        </div>
+                                        <div>
+                                            <p className="font-display font-bold text-gray-900 text-sm sm:text-base">
+                                                5 Types of Schnitzels
+                                            </p>
+                                            <p className="text-xs sm:text-sm text-gray-600">
+                                                Chicken • Beef • Pork • Fish • Veg
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                     </motion.div>
                 </div>

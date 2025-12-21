@@ -5,13 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Star, ArrowRight } from "lucide-react";
 
-// Schnitzel types with colors
+// Schnitzel types with premium styling
 const schnitzelTypes = [
-    { name: "Chicken", bgColor: "bg-amber-100", textColor: "text-amber-800" },
-    { name: "Beef", bgColor: "bg-red-100", textColor: "text-red-800" },
-    { name: "Pork", bgColor: "bg-orange-100", textColor: "text-orange-800" },
-    { name: "Fish", bgColor: "bg-blue-100", textColor: "text-blue-800" },
-    { name: "Veg", bgColor: "bg-green-100", textColor: "text-green-800" },
+    { name: "Chicken", bgColor: "bg-amber-50", textColor: "text-amber-700", borderColor: "border-amber-200", hoverBg: "hover:bg-amber-100" },
+    { name: "Beef", bgColor: "bg-red-50", textColor: "text-red-700", borderColor: "border-red-200", hoverBg: "hover:bg-red-100" },
+    { name: "Pork", bgColor: "bg-orange-50", textColor: "text-orange-700", borderColor: "border-orange-200", hoverBg: "hover:bg-orange-100" },
+    { name: "Fish", bgColor: "bg-blue-50", textColor: "text-blue-700", borderColor: "border-blue-200", hoverBg: "hover:bg-blue-100" },
+    { name: "Veg", bgColor: "bg-green-50", textColor: "text-green-700", borderColor: "border-green-200", hoverBg: "hover:bg-green-100" },
 ];
 
 export default function SignatureDish() {
@@ -37,11 +37,29 @@ export default function SignatureDish() {
                                 quality={90}
                             />
                         </div>
-                        {/* Best Seller Badge */}
-                        <div className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 bg-red-600 text-white px-4 py-2 rounded-full font-semibold shadow-lg flex items-center gap-2 text-sm">
-                            <Star size={16} fill="currentColor" />
-                            Best Seller
-                        </div>
+
+                        {/* Premium Best Seller Badge with Golden Glow */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.3, duration: 0.4, ease: "easeOut" }}
+                            className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4"
+                        >
+                            <div className="group relative">
+                                {/* Outer glow */}
+                                <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-400 rounded-full opacity-70 blur-md animate-pulse" />
+
+                                {/* Badge */}
+                                <div className="relative bg-gradient-to-r from-red-600 via-red-500 to-rose-600 text-white px-5 py-2.5 rounded-full font-semibold shadow-lg flex items-center gap-2 text-sm border border-red-400/30">
+                                    {/* Glass highlight */}
+                                    <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/25 to-transparent rounded-t-full" />
+
+                                    <Star size={16} fill="currentColor" className="relative z-10 text-amber-300 drop-shadow-sm" />
+                                    <span className="relative z-10 drop-shadow-sm">Best Seller</span>
+                                </div>
+                            </div>
+                        </motion.div>
                     </motion.div>
 
                     {/* Content */}
@@ -51,10 +69,11 @@ export default function SignatureDish() {
                         viewport={{ once: true, margin: "-50px" }}
                         transition={{ duration: 0.5, delay: 0.1 }}
                     >
-                        <span className="text-red-600 font-semibold text-sm uppercase tracking-wider">
+                        <span className="inline-flex items-center gap-2 text-red-600 font-semibold text-sm uppercase tracking-wider">
+                            <span className="w-6 h-px bg-red-600/50" />
                             Our Signature
                         </span>
-                        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6 leading-tight">
+                        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-3 mb-6 leading-tight">
                             Savor Adelaide's{" "}
                             <span className="text-red-600">Best Schnitzel</span>
                         </h2>
@@ -64,7 +83,7 @@ export default function SignatureDish() {
                             five distinct varieties.
                         </p>
 
-                        {/* Schnitzel Types - Clean chips */}
+                        {/* Schnitzel Types - Premium Interactive Pills */}
                         <div className="flex flex-wrap gap-2 sm:gap-3 mb-6">
                             {schnitzelTypes.map((type, index) => (
                                 <motion.span
@@ -73,7 +92,7 @@ export default function SignatureDish() {
                                     whileInView={{ opacity: 1, scale: 1 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.05 }}
-                                    className={`${type.bgColor} ${type.textColor} rounded-full px-4 py-2 font-semibold text-sm`}
+                                    className={`${type.bgColor} ${type.textColor} ${type.borderColor} ${type.hoverBg} border rounded-full px-4 py-2 font-semibold text-sm cursor-default transition-all duration-200 hover:scale-105 hover:shadow-md`}
                                 >
                                     {type.name}
                                 </motion.span>
@@ -87,10 +106,10 @@ export default function SignatureDish() {
 
                         <Link
                             href="/menu"
-                            className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-900 text-gray-900 font-semibold rounded-xl transition-all duration-200 hover:bg-gray-900 hover:text-white min-h-[48px]"
+                            className="group inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-900 text-gray-900 font-semibold rounded-xl transition-all duration-300 hover:bg-gray-900 hover:text-white hover:shadow-lg min-h-[48px]"
                         >
                             View Full Menu
-                            <ArrowRight size={18} />
+                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </Link>
                     </motion.div>
                 </div>

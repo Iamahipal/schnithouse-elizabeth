@@ -5,45 +5,9 @@ import { ChevronDown, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-// SVG filter for liquid glass distortion effect
-const LiquidGlassFilter = () => (
-    <svg className="absolute w-0 h-0" aria-hidden="true">
-        <defs>
-            <filter id="liquid-glass-distort" x="-50%" y="-50%" width="200%" height="200%">
-                {/* Create noise for distortion */}
-                <feTurbulence
-                    type="fractalNoise"
-                    baseFrequency="0.015 0.015"
-                    numOctaves="2"
-                    seed="5"
-                    result="noise"
-                />
-                {/* Apply distortion to create water droplet effect */}
-                <feDisplacementMap
-                    in="SourceGraphic"
-                    in2="noise"
-                    scale="8"
-                    xChannelSelector="R"
-                    yChannelSelector="G"
-                    result="displaced"
-                />
-                {/* Slight blur for glass feel */}
-                <feGaussianBlur in="displaced" stdDeviation="0.5" result="blurred" />
-                {/* Merge for final effect */}
-                <feMerge>
-                    <feMergeNode in="blurred" />
-                </feMerge>
-            </filter>
-        </defs>
-    </svg>
-);
-
 export default function Hero() {
     return (
         <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
-            {/* SVG Filters */}
-            <LiquidGlassFilter />
-
             {/* Background Image - Static for performance */}
             <div className="absolute inset-0 z-0">
                 <Image
@@ -61,25 +25,36 @@ export default function Hero() {
 
             {/* Content */}
             <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-                {/* Premium Badge with Liquid Glass Effect */}
+                {/* Premium Badge with Liquid Glass Effect - NO SVG FILTER */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.6 }}
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
                     className="inline-block mb-8"
                 >
-                    <div
-                        className="relative px-6 py-3 rounded-full inline-flex items-center gap-3 overflow-hidden"
-                        style={{ filter: "url(#liquid-glass-distort)" }}
-                    >
-                        {/* Badge background with golden glow */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-amber-500/90 via-amber-400/90 to-amber-500/90 rounded-full" />
-                        <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 via-amber-300/30 to-amber-500/20 animate-pulse rounded-full" />
+                    <div className="group relative">
+                        {/* Outer glow effect */}
+                        <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 rounded-full opacity-60 blur-lg group-hover:opacity-80 transition-opacity duration-500" />
 
-                        <Sparkles className="relative z-10 text-amber-900" size={20} />
-                        <span className="relative z-10 font-body font-bold text-amber-900 text-sm md:text-base tracking-wide">
-                            90-Year-Old Family Recipe
-                        </span>
+                        {/* Main badge container with liquid glass effect */}
+                        <div className="relative px-6 py-3.5 rounded-full inline-flex items-center gap-3 overflow-hidden backdrop-blur-md border border-amber-300/50 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_4px_20px_rgba(245,158,11,0.3)]">
+                            {/* Premium gradient background */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-amber-400/95 via-amber-300/95 to-amber-400/95" />
+
+                            {/* Glass highlight on top */}
+                            <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/40 to-transparent rounded-t-full" />
+
+                            {/* Shimmer animation effect */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+
+                            {/* Inner glow */}
+                            <div className="absolute inset-0 rounded-full shadow-[inset_0_0_20px_rgba(255,255,255,0.3)]" />
+
+                            <Sparkles className="relative z-10 text-amber-800 drop-shadow-sm" size={20} />
+                            <span className="relative z-10 font-body font-bold text-amber-900 text-sm md:text-base tracking-wide drop-shadow-sm">
+                                90-Year-Old Family Recipe
+                            </span>
+                        </div>
                     </div>
                 </motion.div>
 
