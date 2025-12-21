@@ -160,7 +160,7 @@ export default function ContactPage() {
                                 <h3 className="font-display text-xl font-bold text-foreground mb-6">
                                     Send us a Message
                                 </h3>
-                                <form onSubmit={handleSubmit} className="space-y-5">
+                                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                                     <div>
                                         <label className="block font-body text-sm text-muted mb-2">Name *</label>
                                         <input

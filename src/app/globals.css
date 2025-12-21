@@ -30,11 +30,11 @@
   --space-24: 6rem;
   /* 96px */
 
-  /* Section Padding (consistent across all sections) */
-  --section-py-mobile: 4rem;
-  /* 64px on mobile */
-  --section-py-desktop: 6rem;
-  /* 96px on desktop */
+  /* Section Padding (PREMIUM - generous spacing) */
+  --section-py-mobile: 5rem;
+  /* 80px on mobile */
+  --section-py-desktop: 7rem;
+  /* 112px on desktop */
 
   /* Container */
   --container-max: 80rem;
@@ -107,15 +107,21 @@ body {
 }
 
 /* ===== SECTION COMPONENT ===== */
-/* Consistent section padding across all sections */
+/* PREMIUM section padding - generous whitespace */
 .section {
-  @apply py-16 md:py-24;
-  scroll-margin-top: 6rem;
-  /* For sticky header offset */
+  @apply py-20 md:py-28;
+  scroll-margin-top: 5rem;
+  /* 80px offset for sticky header */
 }
 
 .section-alt {
-  @apply section bg-gray-50;
+  @apply py-20 md:py-28 bg-gray-50;
+  scroll-margin-top: 5rem;
+}
+
+/* For pages with hero - extra top padding to clear header */
+.section-padding {
+  @apply py-16 md:py-20;
 }
 
 /* ===== CONTAINER ===== */

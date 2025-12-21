@@ -7,9 +7,9 @@ import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
 export default function Footer() {
     return (
         <footer className="bg-brand-black text-white">
-            {/* Main Footer */}
-            <div className="container-custom py-16">
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+            {/* Main Footer - PREMIUM spacing */}
+            <div className="container-custom py-20">
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
                     {/* Brand */}
                     <div className="lg:col-span-1">
                         <Link href="/" className="inline-flex items-center gap-3 mb-4 group">

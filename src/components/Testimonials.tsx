@@ -85,8 +85,8 @@ export default function Testimonials() {
                     ))}
                 </motion.div>
 
-                {/* Testimonials Grid */}
-                <div className="grid md:grid-cols-3 gap-cards">
+                {/* Testimonials Grid - PREMIUM spacing */}
+                <div className="grid md:grid-cols-3 gap-6 md:gap-8">
                     {testimonials.map((testimonial, index) => (
                         <motion.div
                             key={index}

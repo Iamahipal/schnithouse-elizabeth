@@ -18,7 +18,8 @@ export default function SignatureDish() {
     return (
         <section id="signature" className="section section-alt">
             <div className="container-custom">
-                <div className="grid lg:grid-cols-2 gap-sections items-center">
+                {/* PREMIUM: Generous gap between image and text */}
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                     {/* Image */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

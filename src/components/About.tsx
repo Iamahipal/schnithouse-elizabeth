@@ -29,7 +29,8 @@ export default function About() {
     return (
         <section id="about" className="section bg-white">
             <div className="container-custom">
-                <div className="grid lg:grid-cols-2 gap-sections items-center">
+                {/* PREMIUM: Generous gap between text and image */}
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                     {/* Content */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

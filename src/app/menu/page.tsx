@@ -96,8 +96,8 @@ export default function MenuPage() {
                                 key={type.id}
                                 onClick={() => setActiveMenu(type.id)}
                                 className={`flex-shrink-0 px-6 py-3 rounded-full font-body font-semibold transition-all ${activeMenu === type.id
-                                        ? "bg-brand-red text-white shadow-lg"
-                                        : "bg-surface text-foreground hover:bg-gray-200"
+                                    ? "bg-brand-red text-white shadow-lg"
+                                    : "bg-surface text-foreground hover:bg-gray-200"
                                     }`}
                             >
                                 <span>{type.label}</span>
@@ -122,18 +122,19 @@ export default function MenuPage() {
                             transition={{ duration: 0.3 }}
                         >
                             {Object.entries(groupedItems).map(([category, items]) => (
-                                <div key={category} className="mb-12">
-                                    <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground capitalize mb-6">
+                                <div key={category} className="mb-16">
+                                    <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground capitalize mb-8">
                                         {category}
                                     </h2>
-                                    <div className="grid md:grid-cols-2 gap-4">
+                                    {/* PREMIUM: More gap between menu rows */}
+                                    <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                                         {items.map((item, index) => (
                                             <motion.div
                                                 key={item.id}
                                                 initial={{ opacity: 0, y: 20 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 transition={{ delay: index * 0.05 }}
-                                                className="card flex gap-4 p-4 group cursor-pointer"
+                                                className="card flex gap-5 p-5 group cursor-pointer"
                                             >
                                                 {/* Image */}
                                                 <div className="relative w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">

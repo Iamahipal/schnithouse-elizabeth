@@ -73,8 +73,8 @@ export default function Promotions() {
                     </h2>
                 </motion.div>
 
-                {/* Cards Grid */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-cards">
+                {/* Cards Grid - PREMIUM spacing between cards */}
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                     {promotions.map((promo, index) => (
                         <motion.div
                             key={promo.title}
