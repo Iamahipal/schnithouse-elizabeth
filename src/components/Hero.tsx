@@ -1,22 +1,84 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown, Sparkles, Utensils, Flame, Star } from "lucide-react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { ChevronDown, Sparkles } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
-// Floating food icons for parallax decoration
-const floatingIcons = [
-    { Icon: Utensils, x: "10%", y: "20%", delay: 0, size: 24 },
-    { Icon: Flame, x: "85%", y: "25%", delay: 0.5, size: 20 },
-    { Icon: Star, x: "15%", y: "70%", delay: 1, size: 18 },
-    { Icon: Sparkles, x: "80%", y: "65%", delay: 1.5, size: 22 },
-    { Icon: Utensils, x: "5%", y: "45%", delay: 2, size: 16 },
-    { Icon: Star, x: "90%", y: "45%", delay: 2.5, size: 20 },
+// Floating food images with positions and parallax depth
+const floatingImages = [
+    {
+        src: "https://images.unsplash.com/photo-1599921841143-819065a55cc6?w=400&q=80",
+        alt: "Crispy schnitzel",
+        x: "5%", y: "15%",
+        width: 180, height: 120,
+        depth: 0.08, // How much it moves with mouse
+        rotate: -8,
+        delay: 0
+    },
+    {
+        src: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80",
+        alt: "BBQ ribs",
+        x: "80%", y: "10%",
+        width: 160, height: 110,
+        depth: 0.05,
+        rotate: 6,
+        delay: 0.2
+    },
+    {
+        src: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400&q=80",
+        alt: "Fresh salad",
+        x: "2%", y: "55%",
+        width: 140, height: 100,
+        depth: 0.06,
+        rotate: 5,
+        delay: 0.4
+    },
+    {
+        src: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&q=80",
+        alt: "Gourmet burger",
+        x: "82%", y: "50%",
+        width: 170, height: 115,
+        depth: 0.07,
+        rotate: -5,
+        delay: 0.6
+    },
+    {
+        src: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80",
+        alt: "Pizza",
+        x: "15%", y: "75%",
+        width: 150, height: 100,
+        depth: 0.04,
+        rotate: 8,
+        delay: 0.8
+    },
+    {
+        src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80",
+        alt: "Food platter",
+        x: "75%", y: "78%",
+        width: 165, height: 110,
+        depth: 0.06,
+        rotate: -6,
+        delay: 1
+    },
 ];
 
 export default function Hero() {
     const containerRef = useRef<HTMLElement>(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    // Mouse position tracking with smooth springs
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const smoothMouseX = useSpring(mouseX, { stiffness: 50, damping: 20 });
+    const smoothMouseY = useSpring(mouseY, { stiffness: 50, damping: 20 });
+
+    // Gyroscope/device orientation for mobile
+    const gyroX = useMotionValue(0);
+    const gyroY = useMotionValue(0);
+    const smoothGyroX = useSpring(gyroX, { stiffness: 30, damping: 30 });
+    const smoothGyroY = useSpring(gyroY, { stiffness: 30, damping: 30 });
 
     // Scroll progress tracking
     const { scrollYProgress } = useScroll({
@@ -29,7 +91,41 @@ export default function Hero() {
     const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
     const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
     const contentScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-    const floatingOpacity = useTransform(scrollYProgress, [0, 0.3], [0.6, 0]);
+    const floatingOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+
+    // Detect mobile and setup event listeners
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+
+        // Mouse move handler for desktop
+        const handleMouseMove = (e: MouseEvent) => {
+            if (isMobile) return;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            mouseX.set((e.clientX - centerX) / centerX);
+            mouseY.set((e.clientY - centerY) / centerY);
+        };
+
+        // Device orientation handler for mobile (gyroscope)
+        const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
+            if (!isMobile) return;
+            const gamma = e.gamma || 0; // Left/right tilt (-90 to 90)
+            const beta = e.beta || 0;   // Front/back tilt (-180 to 180)
+            gyroX.set(Math.max(-1, Math.min(1, gamma / 30)));
+            gyroY.set(Math.max(-1, Math.min(1, (beta - 45) / 30)));
+        };
+
+        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("deviceorientation", handleDeviceOrientation);
+
+        return () => {
+            window.removeEventListener("resize", checkMobile);
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("deviceorientation", handleDeviceOrientation);
+        };
+    }, [isMobile, mouseX, mouseY, gyroX, gyroY]);
 
     // Stagger animation variants
     const containerVariants = {
@@ -81,46 +177,86 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
             </motion.div>
 
-            {/* Floating Decorative Icons - Parallax Layers */}
+            {/* Floating Food Images - Mouse/Gyro Parallax */}
             <motion.div
-                className="absolute inset-0 z-[5] pointer-events-none"
+                className="absolute inset-0 z-[5] pointer-events-none hidden md:block"
                 style={{ opacity: floatingOpacity }}
             >
-                {floatingIcons.map((item, index) => (
-                    <motion.div
-                        key={index}
-                        className="absolute"
-                        style={{ left: item.x, top: item.y }}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{
-                            opacity: 0.4,
-                            scale: 1,
-                            y: [0, -15, 0],
-                            rotate: [0, 5, -5, 0]
-                        }}
-                        transition={{
-                            opacity: { delay: item.delay + 0.5, duration: 0.8 },
-                            scale: { delay: item.delay + 0.5, duration: 0.8 },
-                            y: {
-                                delay: item.delay + 1,
-                                duration: 4 + index * 0.5,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            },
-                            rotate: {
-                                delay: item.delay + 1,
-                                duration: 6 + index * 0.3,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }
-                        }}
-                    >
-                        <item.Icon
-                            size={item.size}
-                            className="text-amber-400/60 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]"
-                        />
-                    </motion.div>
-                ))}
+                {floatingImages.map((item, index) => {
+                    // Calculate movement based on mouse/gyro and depth
+                    const xMovement = useTransform(
+                        isMobile ? smoothGyroX : smoothMouseX,
+                        [-1, 1],
+                        [-50 * item.depth * 100, 50 * item.depth * 100]
+                    );
+                    const yMovement = useTransform(
+                        isMobile ? smoothGyroY : smoothMouseY,
+                        [-1, 1],
+                        [-30 * item.depth * 100, 30 * item.depth * 100]
+                    );
+
+                    return (
+                        <motion.div
+                            key={index}
+                            className="absolute"
+                            style={{
+                                left: item.x,
+                                top: item.y,
+                                x: xMovement,
+                                y: yMovement,
+                            }}
+                            initial={{ opacity: 0, scale: 0.8, rotate: item.rotate - 10 }}
+                            animate={{
+                                opacity: 1,
+                                scale: 1,
+                                rotate: item.rotate,
+                            }}
+                            transition={{
+                                opacity: { delay: item.delay + 0.3, duration: 0.8 },
+                                scale: { delay: item.delay + 0.3, duration: 0.8, ease: "easeOut" },
+                                rotate: { delay: item.delay + 0.3, duration: 0.8 }
+                            }}
+                        >
+                            {/* Floating bob animation wrapper */}
+                            <motion.div
+                                animate={{
+                                    y: [0, -8, 0],
+                                    rotate: [item.rotate, item.rotate + 2, item.rotate]
+                                }}
+                                transition={{
+                                    y: {
+                                        duration: 4 + index * 0.5,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    },
+                                    rotate: {
+                                        duration: 6 + index * 0.3,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }
+                                }}
+                            >
+                                {/* Glass card container */}
+                                <div className="relative rounded-2xl overflow-hidden shadow-2xl
+                                    bg-white/10 backdrop-blur-sm
+                                    border border-white/20
+                                    shadow-[0_8px_32px_rgba(0,0,0,0.3)]
+                                ">
+                                    <Image
+                                        src={item.src}
+                                        alt={item.alt}
+                                        width={item.width}
+                                        height={item.height}
+                                        className="object-cover"
+                                        sizes="200px"
+                                    />
+                                    {/* Glass shine overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent" />
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    );
+                })}
             </motion.div>
 
             {/* Content with Scroll-Driven Fade & Scale */}
