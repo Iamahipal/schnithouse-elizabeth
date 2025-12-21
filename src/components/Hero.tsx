@@ -6,61 +6,107 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 
-// Floating food images with positions and parallax depth
+// Floating food images with positions and parallax depth - uniform size, 0 rotation
 const floatingImages = [
+    // Top row
     {
         src: "https://images.unsplash.com/photo-1599921841143-819065a55cc6?w=400&q=80",
         alt: "Crispy schnitzel",
-        x: "5%", y: "15%",
-        width: 180, height: 120,
-        depth: 0.08, // How much it moves with mouse
-        rotate: -8,
+        x: "2%", y: "8%",
+        width: 200, height: 140,
+        depth: 0.06,
         delay: 0
     },
     {
         src: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80",
         alt: "BBQ ribs",
-        x: "80%", y: "10%",
-        width: 160, height: 110,
-        depth: 0.05,
-        rotate: 6,
-        delay: 0.2
+        x: "25%", y: "3%",
+        width: 200, height: 140,
+        depth: 0.04,
+        delay: 0.1
     },
     {
-        src: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400&q=80",
-        alt: "Fresh salad",
-        x: "2%", y: "55%",
-        width: 140, height: 100,
-        depth: 0.06,
-        rotate: 5,
-        delay: 0.4
+        src: "https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=400&q=80",
+        alt: "Breakfast spread",
+        x: "72%", y: "5%",
+        width: 200, height: 140,
+        depth: 0.05,
+        delay: 0.2
     },
+    // Right side
     {
         src: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&q=80",
         alt: "Gourmet burger",
-        x: "82%", y: "50%",
-        width: 170, height: 115,
+        x: "83%", y: "25%",
+        width: 200, height: 140,
         depth: 0.07,
-        rotate: -5,
-        delay: 0.6
+        delay: 0.3
+    },
+    {
+        src: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80",
+        alt: "Pancakes with berries",
+        x: "85%", y: "50%",
+        width: 200, height: 140,
+        depth: 0.05,
+        delay: 0.4
     },
     {
         src: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80",
         alt: "Pizza",
-        x: "15%", y: "75%",
-        width: 150, height: 100,
+        x: "80%", y: "72%",
+        width: 200, height: 140,
+        depth: 0.06,
+        delay: 0.5
+    },
+    // Bottom row
+    {
+        src: "https://images.unsplash.com/photo-1482049016gy-2a13ae1b83f9?w=400&q=80",
+        alt: "Pasta dish",
+        x: "60%", y: "85%",
+        width: 200, height: 140,
         depth: 0.04,
-        rotate: 8,
-        delay: 0.8
+        delay: 0.6
     },
     {
         src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80",
         alt: "Food platter",
-        x: "75%", y: "78%",
-        width: 165, height: 110,
+        x: "35%", y: "88%",
+        width: 200, height: 140,
+        depth: 0.05,
+        delay: 0.7
+    },
+    {
+        src: "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=400&q=80",
+        alt: "Tacos",
+        x: "10%", y: "82%",
+        width: 200, height: 140,
         depth: 0.06,
-        rotate: -6,
-        delay: 1
+        delay: 0.8
+    },
+    // Left side
+    {
+        src: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=400&q=80",
+        alt: "Fresh salad",
+        x: "-3%", y: "60%",
+        width: 200, height: 140,
+        depth: 0.05,
+        delay: 0.9
+    },
+    {
+        src: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=400&q=80",
+        alt: "Steak dinner",
+        x: "-2%", y: "35%",
+        width: 200, height: 140,
+        depth: 0.07,
+        delay: 1.0
+    },
+    {
+        src: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&q=80",
+        alt: "Pasta carbonara",
+        x: "48%", y: "2%",
+        width: 200, height: 140,
+        depth: 0.04,
+        delay: 1.1
     },
 ];
 
@@ -205,48 +251,41 @@ export default function Hero() {
                                 x: xMovement,
                                 y: yMovement,
                             }}
-                            initial={{ opacity: 0, scale: 0.8, rotate: item.rotate - 10 }}
+                            initial={{ opacity: 0, scale: 0.8 }}
                             animate={{
                                 opacity: 1,
                                 scale: 1,
-                                rotate: item.rotate,
                             }}
                             transition={{
                                 opacity: { delay: item.delay + 0.3, duration: 0.8 },
                                 scale: { delay: item.delay + 0.3, duration: 0.8, ease: "easeOut" },
-                                rotate: { delay: item.delay + 0.3, duration: 0.8 }
                             }}
                         >
                             {/* Floating bob animation wrapper */}
                             <motion.div
                                 animate={{
-                                    y: [0, -8, 0],
-                                    rotate: [item.rotate, item.rotate + 2, item.rotate]
+                                    y: [0, -6, 0],
                                 }}
                                 transition={{
                                     y: {
-                                        duration: 4 + index * 0.5,
+                                        duration: 4 + index * 0.3,
                                         repeat: Infinity,
                                         ease: "easeInOut"
                                     },
-                                    rotate: {
-                                        duration: 6 + index * 0.3,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }
                                 }}
                             >
-                                {/* Glass card container */}
-                                <div className="relative rounded-2xl overflow-hidden shadow-2xl
-                                    bg-white/10 backdrop-blur-sm
-                                    border border-white/20
-                                    shadow-[0_8px_32px_rgba(0,0,0,0.3)]
-                                ">
+                                {/* Glass card container - fixed 200x140 */}
+                                <div
+                                    className="relative rounded-2xl overflow-hidden shadow-2xl
+                                        bg-white/10 backdrop-blur-sm
+                                        border border-white/20
+                                        shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+                                    style={{ width: 200, height: 140 }}
+                                >
                                     <Image
                                         src={item.src}
                                         alt={item.alt}
-                                        width={item.width}
-                                        height={item.height}
+                                        fill
                                         className="object-cover"
                                         sizes="200px"
                                     />
