@@ -60,61 +60,50 @@ export default function Hero() {
                     </div>
                 </motion.div>
 
-                {/* Main Headline - High contrast with text shadow */}
+                {/* Main Headline - Engaging, not just restaurant name */}
                 <motion.h1
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.6 }}
-                    className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-4"
+                    className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
                     style={{
                         textShadow: "0 4px 20px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3)"
                     }}
                 >
-                    Schnithouse
+                    Adelaide's <span className="text-brand-red">Best</span> Schnitzel
                 </motion.h1>
 
-                <motion.p
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.6 }}
-                    className="font-display text-2xl sm:text-3xl md:text-4xl text-white italic mb-6"
-                    style={{
-                        textShadow: "0 2px 10px rgba(0,0,0,0.5)"
-                    }}
-                >
-                    Elizabeth
-                </motion.p>
-
-                {/* Tagline - Now clearly visible */}
+                {/* Tagline - Short and crispy */}
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, duration: 0.6 }}
-                    className="font-body text-lg sm:text-xl md:text-2xl text-white max-w-lg mx-auto mb-10"
+                    className="font-body text-lg sm:text-xl md:text-2xl text-white/90 max-w-xl mx-auto mb-10"
                     style={{
                         textShadow: "0 2px 8px rgba(0,0,0,0.5)"
                     }}
                 >
-                    "A gastronomic experience that is second to none!"
+                    Crispy on the outside. Juicy on the inside.
+                    <span className="block mt-1 text-amber-300 font-semibold">Unforgettable every time.</span>
                 </motion.p>
 
-                {/* CTAs - Clean and accessible */}
+                {/* CTAs - Consistent sizing, equal width, dynamic */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6, duration: 0.6 }}
-                    className="flex flex-col sm:flex-row gap-4 justify-center"
+                    className="flex flex-col sm:flex-row gap-4 justify-center items-center"
                 >
                     <Link
                         href="/menu"
-                        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] min-h-[52px] shadow-lg shadow-red-600/30"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-red hover:bg-red-700 text-white font-semibold rounded-xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] min-h-[56px] min-w-[180px] shadow-lg shadow-red-600/30"
                     >
                         <span>View Menu</span>
                         <span className="text-lg">→</span>
                     </Link>
                     <Link
                         href="/book"
-                        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/30 text-white font-semibold rounded-xl transition-all duration-200 hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98] min-h-[52px]"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/15 backdrop-blur-md border-2 border-white/40 text-white font-semibold rounded-xl transition-all duration-200 hover:bg-white/25 hover:border-white/60 hover:scale-[1.02] active:scale-[0.98] min-h-[56px] min-w-[180px]"
                     >
                         Book a Table
                     </Link>

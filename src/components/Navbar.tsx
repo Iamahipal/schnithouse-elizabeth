@@ -55,24 +55,19 @@ export default function Navbar() {
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16 md:h-20">
-                        {/* Logo with Brand Icon */}
-                        <Link href="/" className="flex items-center gap-2 min-h-[44px]">
+                        {/* Brand Name - Unified "Schnithouse Elizabeth" */}
+                        <Link href="/" className="flex items-center gap-3 min-h-[44px] group">
                             <Image
                                 src="/logo.png"
                                 alt="Schnithouse Logo"
                                 width={48}
                                 height={48}
-                                className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                                className="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform group-hover:scale-105"
                                 priority
                             />
-                            <div className="flex flex-col">
-                                <span className="font-display text-lg sm:text-xl md:text-2xl font-bold text-gray-900 leading-tight">
-                                    Schnithouse
-                                </span>
-                                <span className="text-red-600 text-[10px] sm:text-xs font-medium -mt-0.5 hidden sm:block">
-                                    Elizabeth
-                                </span>
-                            </div>
+                            <span className="font-display text-xl md:text-2xl font-bold text-gray-900 group-hover:text-brand-red transition-colors">
+                                Schnithouse <span className="text-brand-red">Elizabeth</span>
+                            </span>
                         </Link>
 
                         {/* Desktop Nav - PREMIUM spacing */}
@@ -143,7 +138,7 @@ export default function Navbar() {
                             className="fixed top-0 right-0 bottom-0 w-[280px] bg-white shadow-xl z-50 md:hidden"
                         >
                             <div className="flex flex-col h-full">
-                                {/* Header with Logo */}
+                                {/* Header with Brand */}
                                 <div className="flex items-center justify-between p-4 border-b">
                                     <div className="flex items-center gap-2">
                                         <Image
@@ -153,8 +148,8 @@ export default function Navbar() {
                                             height={40}
                                             className="w-10 h-10 object-contain"
                                         />
-                                        <span className="font-display text-xl font-bold">
-                                            Menu
+                                        <span className="font-display text-lg font-bold">
+                                            Schnithouse <span className="text-brand-red">Elizabeth</span>
                                         </span>
                                     </div>
                                     <button
