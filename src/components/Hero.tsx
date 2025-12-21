@@ -8,20 +8,28 @@ import Link from "next/link";
 export default function Hero() {
     return (
         <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
-            {/* Background Image - Static for performance */}
+            {/* Background Video - Autoplay, muted, looping for showcase */}
             <div className="absolute inset-0 z-0">
-                <Image
-                    src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=85"
-                    alt="Fine dining restaurant ambiance"
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="100vw"
-                    quality={85}
-                />
-                {/* Stronger gradient overlay (25-35% black) for text legibility - Audit recommendation */}
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover"
+                    poster="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=85"
+                >
+                    {/* Pexels royalty-free restaurant/food ambiance video */}
+                    <source
+                        src="https://videos.pexels.com/video-files/3298572/3298572-uhd_2560_1440_30fps.mp4"
+                        type="video/mp4"
+                    />
+                    {/* Fallback for browsers that don't support video */}
+                    Your browser does not support the video tag.
+                </video>
+
+                {/* Gradient overlay for text legibility */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-                {/* Additional vignette for focus on center text */}
+                {/* Vignette for center focus */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
             </div>
 
